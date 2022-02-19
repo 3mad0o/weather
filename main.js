@@ -1,6 +1,8 @@
 let notification= document.querySelector('.notification'),
     tempval= document.querySelector('.tempvalue'),
+    theimg =document.querySelector('.theimg'),
     tempdesc= document.querySelector('.tempdescription'),
+    tempdescp= document.querySelector('.tempdescp'),
     locationn= document.querySelector('.location');
 let key ='503efd8a4fccbbcdf9883e8d6ea1deac';
 let weather = {};
@@ -41,7 +43,8 @@ function showerror(err){
             console.log(data);
             weather.temp =Math.floor(data.main.temp-273);
             weather.desc =data.weather[0].description;
-            weather.loc =data.name;
+            weather.loc =data.name +'/'+data.sys.country;
+            weather.image=data.weather[0].icon;
             
             
         })
@@ -51,6 +54,8 @@ function showerror(err){
 }
 function displayweather(){
     tempval.textContent=weather.temp +'c';
-    tempdesc.textContent =weather.desc;
-    locationn.textContent =weather.loc;
+    tempdescp.textContent =weather.desc;
+    locationn.textContent =weather.loc ;
+    theimg.innerHTML='<img src=\'https://openweathermap.org/img/wn/'+weather.image+'@2x.png\'>';
+   // https://openweathermap.org/img/wn/'+weather.image+'@2x.png
 }
